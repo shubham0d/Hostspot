@@ -4,6 +4,8 @@ from .forms import SetupForm
 from .forms import UploadFileForm
 from django.utils import timezone
 from .fileHandler import uploadFileHandler
+from .utils import randomIdGenerator
+
 # Create your views here.
 def index(request):
     if request.method == "POST":
@@ -13,9 +15,9 @@ def index(request):
             setup = form.save(commit=False)
             setup.active = True
             setup.creationDate = timezone.now()
+            hashId = randomIdGenerator
             setup.save()
-            print (request.FILES['file'])
-            uploadFileHandler(request.FILES['file'])
+            uploadFileHandler(request.FILES['file'], hashId)
             submitSuccessfully = True
             context = {
             'form': form,
