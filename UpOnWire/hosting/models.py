@@ -14,3 +14,7 @@ class DefaultConf(models.Model):
     expireDate = models.IntegerField()
     hostingType = models.CharField(max_length=1, choices=WHAT_TO_HOST)
     active = models.BooleanField(default=False)
+    def __str__(self):
+        return self.imageId
+    def was_expired(self):
+        return self.creationDate >= timezone.now() - datetime.timedelta(days=expireDate)
