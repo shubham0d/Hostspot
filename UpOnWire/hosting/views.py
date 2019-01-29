@@ -5,7 +5,8 @@ from .forms import UploadFileForm
 from django.utils import timezone
 from .fileHandler import uploadFileHandler
 from .utils import randomIdGenerator
-
+from django.core.files.storage import FileSystemStorage
+from .dockerConfig import createDockerInstance
 # Create your views here.
 def index(request):
     if request.method == "POST":
@@ -15,9 +16,11 @@ def index(request):
             setup = form.save(commit=False)
             setup.active = True
             setup.creationDate = timezone.now()
-            hashId = randomIdGenerator
-            setup.save()
-            uploadFileHandler(request.FILES['file'], hashId)
+            hashId = randomIdGenerator()
+            setup.imageId = hashId
+            uploadFileHandler(request.FILES['file'], str(hashId))
+            createDockerInstance(hashId, setup.hostingType)
+            #setup.save()
             submitSuccessfully = True
             context = {
             'form': form,

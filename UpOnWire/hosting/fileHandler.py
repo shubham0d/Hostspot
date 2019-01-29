@@ -1,4 +1,7 @@
 def uploadFileHandler(f, hashId):
-    with open('uploads/'+str(hashId)+'.zip', 'wb+') as destination:
+    hashString = str(hashId)
+    print (hashString)
+    filename = ('uploads/'+hashString+'.zip')
+    with open(filename, 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
