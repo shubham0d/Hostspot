@@ -1,22 +1,17 @@
-
-import zipfile
-
+from .utils import uncompressFile
+import commands
 
 def createDockerInstance(imageId, hostingType):
     print (hostingType)
     if (hostingType == 'W'):
         uncompressFile(imageId)
-
-
-
+        createDockerFile(imageId)
 
 
 
 def createDockerFile(imageId):
-    filename = "uploads/Dockerfile"
+    filename = "uploads/"+str(imageId)+"/Dockerfile"
     dockerFile = open(filename, 'w+')
-
-def uncompressFile(imageId):
-    zip_ref = zipfile.ZipFile(path_to_zip_file, 'r')
-    zip_ref.extractall(directory_to_extract_to)
-    zip_ref.close()
+    dockerFile.write("FROM nginx\nCOPY uploads/"+str(imageId)+"/mysite /usr/share/nginx/html")
+    dockerFile.close()
+    commands.getstatusoutput("docker build -t "+str(imageId)+" .")
