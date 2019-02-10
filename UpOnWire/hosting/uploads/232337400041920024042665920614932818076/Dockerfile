@@ -1,0 +1,2 @@
+FROM nginx
+COPY uploads/232337400041920024042665920614932818076/mysite /usr/share/nginx/html
