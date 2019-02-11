@@ -26,5 +26,5 @@ def startContainer(imageId):
         return 0
 
 def getContainerIp(imageId):
-    ip = getstatusoutput("docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' " + str(imageId) +"_running")
+    ip = getstatusoutput("docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' " + str(imageId) +"_running")[1]
     return str(ip)
