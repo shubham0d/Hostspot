@@ -1,14 +1,33 @@
-We are under construction.
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>UpOnWire Hosting</title>
+  <!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-kit/2.0.4/css/material-kit.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/material-kit/2.0.4/js/material-kit.js"></script>
+</head>
+
+<body style="padding: 20px;">
 
 {% block content %}
+<div>
     <h2>Setup</h2>
         <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
-            {{ context.form.as_p }}
-            {{ context.uploadForm.as_p }}
+            {{ context.form|crispy }}
+            {{ context.uploadForm }}
             <button type="submit" class="save btn btn-default">Save</button>
         </form>
 
         {% if context.submitSuccessfully is True %}
             Thanks for submitting the details
+
         {% endif %}
+</div>
 {% endblock %}
+</body>
+</html>

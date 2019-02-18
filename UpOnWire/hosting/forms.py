@@ -16,6 +16,6 @@ class UploadFileForm(forms.Form):
 class HostingForm(forms.Form):
     #renewal_date = forms.DateField(help_text="Enter a date between now and 4 weeks (default 3).")
     #body = forms.CharField(widget = forms.Textarea)
-    hostingType = forms.ChoiceField(label = "Hosting type",help_text='type of containt you want to host', choices = [('W', 'Website'), ('V', 'Video'), ('I', 'Image'), ('O', 'Other')])
+    hostingType = forms.ChoiceField(label = "Hosting type",help_text='type of content you want to host', choices = [('W', 'Website'), ('V', 'Video'), ('I', 'Image'), ('O', 'Other')])
     expireDays = forms.DecimalField(label = "Expire Days", initial=14, max_value = 14, min_value = 1)
-    domain = forms.CharField(label = "Domain name(Optional)", required = False, help_text='Want to connect the hosting to your own domain/url.')
+    domain = forms.CharField(label = "Domain name(Optional)", required = False, help_text='Domain to host on. Should be in form xyz.abc')

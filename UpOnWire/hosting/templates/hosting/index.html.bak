@@ -1,0 +1,15 @@
+{% load crispy_forms_tags %}
+We are under construction.
+
+{% block content %}
+    <h2>Setup</h2>
+        <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+            {{ context.form|crispy }}
+            {{ context.uploadForm.as_p }}
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+
+        {% if context.submitSuccessfully is True %}
+            Thanks for submitting the details
+        {% endif %}
+{% endblock %}
