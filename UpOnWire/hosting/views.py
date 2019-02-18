@@ -20,7 +20,7 @@ def index(request):
             expireDays = form.cleaned_data['expireDays']
             url = form.cleaned_data['domain']
             uploadFileHandler(request.FILES['file'], str(hashId))
-            hosting(hashId, hostingType, url, expireDays)
+            #hosting(hashId, hostingType, url, expireDays)
             hostingInstance = DefaultConf(imageId = hashId, creationDate = timezone.now(), url = url,expireDate = expireDays,hostingType = hostingType,active = True)
             hostingInstance.save()
             submitSuccessfully = True

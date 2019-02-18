@@ -2,10 +2,12 @@ import random
 import zipfile
 import shutil
 import os
+import string
 from subprocess import getstatusoutput
 def randomIdGenerator():
-    hashId = random.getrandbits(128)
-    return hashId
+    """Generate a random string of letters and digits """
+    lettersAndDigits = string.ascii_letters + string.digits
+    return ''.join(random.choice(lettersAndDigits) for i in range(128))
 
 def uncompressFile(imageId):
     zipRef = zipfile.ZipFile('hosting/uploads/'+str(imageId)+'.zip', 'r')
