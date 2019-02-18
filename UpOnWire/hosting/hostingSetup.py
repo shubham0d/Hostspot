@@ -1,12 +1,13 @@
 from .dockerConfig import createDockerInstance
 from .nginxConfig import siteConfig
-from utils import removeDirectory
-from utils import removeFile
+from .utils import removeDirectory
+from .utils import removeFile
 
 def hosting(imageId, hostingType, domainName, expireDate):
-    containerIp = createDockerInstance(imageId, hostingType)
-    if (containerIp!= ''):
+    #containerIp = createDockerInstance(imageId, hostingType)
+    #if (containerIp!= ''):
         #remove the zip and folder
-        removeDirectory("hosting/uploads/"+str(imageId))
-        removeFile("hosting/uploads/"+str(imageId)+".zip")
-    siteConfig(imageId, containerIp, domainName)
+        #removeDirectory("hosting/uploads/"+str(imageId))
+        #removeFile("hosting/uploads/"+str(imageId)+".zip")
+    #siteConfig(imageId, containerIp, domainName)
+    print ("Buuuluu")

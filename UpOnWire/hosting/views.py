@@ -1,26 +1,28 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import SetupForm
 from .forms import UploadFileForm
+from .forms import HostingForm
 from django.utils import timezone
 from .fileHandler import uploadFileHandler
 from .utils import randomIdGenerator
 from django.core.files.storage import FileSystemStorage
 from .hostingSetup import hosting
+from .models import DefaultConf
 # Create your views here.
 def index(request):
     if request.method == "POST":
-        form = SetupForm(request.POST, request.FILES)
+        form = HostingForm(request.POST, request.FILES)
         uploadForm = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            setup = form.save(commit=False)
-            setup.active = True
-            setup.creationDate = timezone.now()
             hashId = randomIdGenerator()
-            setup.imageId = hashId
+            hostingType = form.cleaned_data['hostingType']
+            print (hostingType)
+            expireDays = form.cleaned_data['expireDays']
+            url = form.cleaned_data['domain']
             uploadFileHandler(request.FILES['file'], str(hashId))
-            hosting(setup.imageId, setup.hostingType, setup.url, setup.expireDate)
-            #setup.save()
+            hosting(hashId, hostingType, url, expireDays)
+            hostingInstance = DefaultConf(imageId = hashId, creationDate = timezone.now(), url = url,expireDate = expireDays,hostingType = hostingType,active = True)
+            hostingInstance.save()
             submitSuccessfully = True
             context = {
             'form': form,
@@ -30,7 +32,8 @@ def index(request):
             print(context)
             return render(request, 'hosting/index.html', {'context': context})
     else:
-        form = SetupForm()
+        #form = SetupForm()
+        form = HostingForm()
         uploadForm = UploadFileForm()
         submitSuccessfully = False
         context = {

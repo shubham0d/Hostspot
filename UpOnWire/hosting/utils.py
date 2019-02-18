@@ -13,10 +13,7 @@ def uncompressFile(imageId):
     zipRef.close()
 
 def serviceReloader(serviceName):
-    if (getstatusoutput("service "+serviceName+" restart")[0] == 0):
-        return True
-    else:
-        return False
+    getstatusoutput("service "+serviceName+" restart")
 
 def removeDirectory(folderName):
     shutil.rmtree(folderName)
