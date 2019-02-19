@@ -9,24 +9,33 @@
   <title>UpOnWire Hosting</title>
   <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-kit/2.0.4/css/material-kit.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/material-kit/2.0.4/js/material-kit.js"></script>
 </head>
 
-<body style="padding: 20px;">
+<body style="padding: 3%;">
 
 {% block content %}
-<div>
-    <h2>Setup</h2>
-        <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+<div class = "row">
+
+<div class="col-md-4">
+    <h2 class="animated bounce bounceInDown">Setup</h2>
+        <form method="POST" class="post-form animated zoomIn delay-1s" enctype="multipart/form-data">{% csrf_token %}
             {{ context.form|crispy }}
-            {{ context.uploadForm }}
-            <button type="submit" class="save btn btn-default">Save</button>
+            {{ context.uploadForm.as_p }}
+            <button type="submit" class="save btn  btn-rose">Save</button>
         </form>
 
         {% if context.submitSuccessfully is True %}
             Thanks for submitting the details
 
         {% endif %}
+</div>
+<div>
+<b>Instructions:</b><br />
+To host website create a folder with name "mysite"<br/> and put all your webpages including
+index.html under that.<br /> Then compress it in zip format.
+</div>
 </div>
 {% endblock %}
 </body>
