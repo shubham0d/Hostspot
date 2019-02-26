@@ -1,6 +1,6 @@
 from shutil import copy
 from subprocess import getstatusoutput
-from .utils import serviceReloader
+#from .utils import serviceReloader
 import threading
 # use better config file editing method
 def editSiteTemplate(siteConfFile, domainName, containerIp, imageId, userUrl):
@@ -9,12 +9,12 @@ def editSiteTemplate(siteConfFile, domainName, containerIp, imageId, userUrl):
         configData = file.readlines()
     file.close()
     if (userUrl == True):
-        configData[2] = '    server_name '+domainName+';'
-        configData[6] = '            proxy_pass http://'+containerIp+':80/;\n'
+        configData[2] = '    server_name '+domainName+';\n'
+        configData[5] = '            proxy_pass http://'+containerIp+':80/;\n'
     else:
-        configData[2] = '    server_name uponwire.com;'
-        configData[3] = '    location '+domainName+' {'
-        configData[6] = '            proxy_pass http://'+containerIp+':80/;\n'
+        configData[2] = '    server_name uponwire.com;\n'
+        configData[3] = '    location '+domainName+' {\n'
+        configData[5] = '            proxy_pass http://'+containerIp+':80/;\n'
     with open(siteConfFile, 'w') as file:
         file.writelines( configData )
     file.close()
@@ -28,11 +28,11 @@ def editHosts(domainName):
 
 def siteConfig(imageId, containerIp, domainName, userUrl):
     siteConfFile = "/etc/nginx/sites-available/"+str(imageId)+".conf"
-    copy("hosting/config/defaultNginxSiteTemplate.conf", siteConfFile)
+    copy("config/defaultNginxSiteTemplate.conf", siteConfFile)
     editSiteTemplate(siteConfFile, domainName, containerIp, imageId, userUrl)
     if (userUrl == True):
         editHosts(domainName)
-    threading.Thread(target=serviceReloader, args = ("nginx"))
+    #threading.Thread(target=serviceReloader, args = ("nginx"))
 
 
-#siteConfig("assaass",'192.168.122.1', "test")
+#siteConfig("bibibib",'192.168.122.1', "pinki.com", True)
