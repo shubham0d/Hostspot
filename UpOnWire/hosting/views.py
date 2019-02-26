@@ -18,13 +18,20 @@ def index(request):
             hashId = randomIdGenerator(128)
             hostingType = form.cleaned_data['hostingType']
             expireDays = form.cleaned_data['expireDays']
+            print (hashId)
             if (form.cleaned_data['domain'] is ""):
                 linkUrl = generateUrlString()
-                url = linkUrl
+                url = "uponwire.com"+linkUrl
+                userUrl = False
             else:
                 url = form.cleaned_data['domain']
+                userUrl = True
             #uploadFileHandler(request.FILES['file'], str(hashId))
-            #hosting(hashId, hostingType, url, expireDays)
+            if (userUrl == True):
+                hosting(hashId, hostingType, url, expireDays, userUrl)
+            else:
+                hosting(hashId, hostingType, linkUrl, expireDays, userUrl)
+            #hosting(hashId, hostingType, url, expireDays, userUrl)
             hostingInstance = DefaultConf(imageId = hashId, creationDate = timezone.now(), url = url,expireDate = expireDays,hostingType = hostingType,active = True)
             hostingInstance.save()
             submitSuccessfully = True
