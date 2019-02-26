@@ -3,5 +3,5 @@ A web based application for easy temperory hosting of multiple websites inside s
 
 ## Features
 * No Login/ Signup <br/>
-* Temperory hosting upto 7 days<br/>
+* Temperory hosting upto 14 days<br/>
 * Secure containerised backend <br/>
