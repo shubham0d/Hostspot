@@ -26,7 +26,7 @@ def index(request):
             else:
                 url = form.cleaned_data['domain']
                 userUrl = True
-            #uploadFileHandler(request.FILES['file'], str(hashId))
+            #uploadFileHandler(request.FILES['file'], str(hashId), hostingType)
             if (userUrl == True):
                 hosting(hashId, hostingType, url, expireDays, userUrl)
             else:

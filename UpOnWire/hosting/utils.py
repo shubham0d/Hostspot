@@ -14,6 +14,14 @@ def uncompressFile(imageId):
     zipRef.extractall('hosting/uploads/'+str(imageId))
     zipRef.close()
 
+def mvFileToDirectory(imageId):
+    try:
+        os.makedirs('hosting/uploads/'+str(imageId))
+        shutil.move('hosting/uploads/'+str(imageId), 'hosting/uploads/'+str(imageId)+'/'+str(imageId))
+    except OSError as e:
+        print ("unable to create directory")
+
+
 def serviceReloader(serviceName):
     getstatusoutput("service "+serviceName+" restart")
 
