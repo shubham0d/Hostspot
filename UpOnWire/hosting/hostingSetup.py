@@ -9,5 +9,5 @@ def hosting(imageId, hostingType, domainName, expireDate, userUrl):
         #remove the zip and folder
         #removeDirectory("hosting/uploads/"+str(imageId))
         #removeFile("hosting/uploads/"+str(imageId)+".zip")
-    #siteConfig(imageId, containerIp, domainName, userUrl)
+    #siteConfig(imageId, containerIp, domainName, userUrl, hostingType)
     print ("Buuuluu")
