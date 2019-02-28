@@ -20,7 +20,7 @@ def editSiteTemplate(siteConfFile, domainName, containerIp, imageId, userUrl, ho
         if (hostingType == 'W'):
             configData[5] = '            proxy_pass http://'+containerIp+':80/;\n'
         else:
-            configData[5] = '            proxy_pass http://'+containerIp+':80/'+str(imageId)+';\n
+            configData[5] = '            proxy_pass http://'+containerIp+':80/'+str(imageId)+';\n'
     with open(siteConfFile, 'w') as file:
         file.writelines( configData )
     file.close()
@@ -38,7 +38,7 @@ def siteConfig(imageId, containerIp, domainName, userUrl, hostingType):
     editSiteTemplate(siteConfFile, domainName, containerIp, imageId, userUrl, hostingType)
     if (userUrl == True):
         editHosts(domainName)
-    #threading.Thread(target=serviceReloader, args = ("nginx"))
+    threading.Thread(target=serviceReloader, args = ("nginx"))
 
 
 #siteConfig("bibibib",'192.168.122.1', "pinki.com", True)

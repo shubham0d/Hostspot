@@ -3,10 +3,11 @@ import zipfile
 import shutil
 import os
 import string
+import subprocess
 from subprocess import getstatusoutput
 def randomIdGenerator(length):
     """Generate a random string of letters and digits """
-    lettersAndDigits = string.ascii_letters + string.digits
+    lettersAndDigits = string.ascii_lowercase + string.digits
     return ''.join(random.choice(lettersAndDigits) for i in range(length))
 
 def uncompressFile(imageId):
@@ -16,9 +17,11 @@ def uncompressFile(imageId):
 
 def mvFileToDirectory(imageId):
     try:
-        os.makedirs('hosting/uploads/'+str(imageId))
-        shutil.move('hosting/uploads/'+str(imageId), 'hosting/uploads/'+str(imageId)+'/'+str(imageId))
+        os.makedirs('hosting/uploads/'+str(imageId)+'_dir')
+        getstatusoutput('mv hosting/uploads/'+str(imageId)+' hosting/uploads/'+str(imageId)+'_dir/')
+        #shutil.move('hosting/uploads/'+str(imageId), 'hosting/uploads/'+str(imageId)+'/'+str(imageId))
     except OSError as e:
+        print (e.message)
         print ("unable to create directory")
 
 

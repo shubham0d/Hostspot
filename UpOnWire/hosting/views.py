@@ -26,14 +26,16 @@ def index(request):
             else:
                 url = form.cleaned_data['domain']
                 userUrl = True
-            #uploadFileHandler(request.FILES['file'], str(hashId), hostingType)
+            uploadFileHandler(request.FILES['file'], str(hashId), hostingType)
             if (userUrl == True):
                 hosting(hashId, hostingType, url, expireDays, userUrl)
+                print ("user entered url")
             else:
+                print ("user doesn't entered url")
                 hosting(hashId, hostingType, linkUrl, expireDays, userUrl)
             #hosting(hashId, hostingType, url, expireDays, userUrl)
             hostingInstance = DefaultConf(imageId = hashId, creationDate = timezone.now(), url = url,expireDate = expireDays,hostingType = hostingType,active = True)
-            hostingInstance.save()
+            #hostingInstance.save()
             submitSuccessfully = True
             context = {
             'form': form,

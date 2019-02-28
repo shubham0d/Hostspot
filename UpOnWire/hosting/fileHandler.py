@@ -1,6 +1,5 @@
 def uploadFileHandler(f, hashId, hostingType):
     hashString = str(hashId)
-    print (hashString)
     if (hostingType == 'W'):
         filename = ('hosting/uploads/'+hashString+'.zip')
     elif (hostingType == 'V' or hostingType == 'I' or hostingType == 'O'):
