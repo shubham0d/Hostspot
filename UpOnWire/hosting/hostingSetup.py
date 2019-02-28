@@ -5,9 +5,12 @@ from .utils import removeFile
 
 def hosting(imageId, hostingType, domainName, expireDate, userUrl):
     containerIp = createDockerInstance(imageId, hostingType)
-    #if (containerIp!= ''):
+    if (containerIp!= ''):
         #remove the zip and folder
-        #removeDirectory("hosting/uploads/"+str(imageId))
-        #removeFile("hosting/uploads/"+str(imageId)+".zip")
-    #siteConfig(imageId, containerIp, domainName, userUrl, hostingType)
-    print ("Buuuluu")
+        if (hostingType == 'W'):
+            removeDirectory("hosting/uploads/"+str(imageId))
+            removeFile("hosting/uploads/"+str(imageId)+".zip")
+        else:
+            removeDirectory("hosting/uploads/"+str(imageId)+"_dir")
+            removeFile("hosting/uploads/"+str(imageId))
+    siteConfig(imageId, containerIp, domainName, userUrl, hostingType)
