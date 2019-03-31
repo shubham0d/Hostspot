@@ -1,0 +1,25 @@
+install docker-ce
+make docker as non root user.
+pull nginx image
+install postgresql
+install virtualenv 
+then create enviornment using virtualenv -p /bin/python3 UpOnWire
+sudo /bin/bash
+cd UpOnWire
+source bin/activate
+pip install django
+pip install uwsgi
+pip3 install psycopg2
+pip3 install psycopg2-binary
+pip install --upgrade django-crispy-forms
+pip install django-material
+
+setup postgresql:
+sudo passwd postgres
+su postgres
+psql
+CREATE USER sample_user WITH PASSWORD 'sample_password';
+CREATE DATABASE uponwire WITH OWNER sample_user;
+in virtualenv makemigrations
+python manage.py migrate
+
