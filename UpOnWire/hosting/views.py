@@ -21,18 +21,13 @@ def index(request):
             print (hashId)
             if (form.cleaned_data['domain'] is ""):
                 linkUrl = generateUrlString()
-                url = "uponwire.com"+linkUrl
-                userUrl = False
+                url = linkUrl+".uponwire.com"
             else:
                 url = form.cleaned_data['domain']
-                userUrl = True
             uploadFileHandler(request.FILES['file'], str(hashId), hostingType)
-            if (userUrl == True):
-                hosting(hashId, hostingType, url, expireDays, userUrl)
-                print ("user entered url")
-            else:
-                print ("user doesn't entered url")
-                hosting(hashId, hostingType, linkUrl, expireDays, userUrl)
+            hosting(hashId, hostingType, url, expireDays)
+            print ("user entered url")
+
             #hosting(hashId, hostingType, url, expireDays, userUrl)
             hostingInstance = DefaultConf(imageId = hashId, creationDate = timezone.now(), url = url,expireDate = expireDays,hostingType = hostingType,active = True)
             #hostingInstance.save()

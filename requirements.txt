@@ -23,3 +23,4 @@ CREATE DATABASE uponwire WITH OWNER sample_user;
 in virtualenv makemigrations
 python manage.py migrate
 
+echo "127.0.0.1 uponwire.com" >> /etc/hosts
